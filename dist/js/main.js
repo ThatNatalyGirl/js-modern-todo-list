@@ -1,5 +1,7 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
@@ -19,41 +21,51 @@ var $todoUL = document.querySelector('.todo ul');
  * Updates it's own internal DOM as needed
  */
 
-var TodoItem = function TodoItem(text) {
-	_classCallCheck(this, TodoItem);
+var TodoItem = function () {
+	function TodoItem(text) {
+		var _this = this;
 
-	this.$text = text;
-	this.done = false;
+		_classCallCheck(this, TodoItem);
 
-	// this.$text = document.querySelector(text);
-	// if (!this.$text) {
-	// 	console.warn(`Couldn't find an element with text`, text);
-	// 	return false;
-	// }
+		this.$text = text;
+		this.done = false;
 
-	// this.$todoUL = this.$text.parentElement.querySelector('.updateView');
-	// this.$todoUL = this.$text.querySelector('ul');
+		this.$todoLI = document.createElement('li');
+		this.$todoButton = document.createElement('button');
+		this.$todoP = document.createElement('p');
 
-	//make an element to show errors in
-	if (!this.$todoUL) {
-		this.$todoUL = document.createElement('ul');
-		this.$todoUL.classList.add('updateView');
-		// this.$text.parentElement.appendChild(this.$todoUL);
+		$todoUL.appendChild(this.$todoLI);
+		this.$todoLI.appendChild(this.$todoButton);
+		this.$todoLI.appendChild(this.$todoP);
+
+		this.$todoP.innerHTML = this.$text;
+		this.$todoButton.innerHTML = "done";
+
+		this.$todoButton.addEventListener('click', function () {
+			_this.markDone();
+		});
 	}
 
-	this.$todoLI = document.createElement('li');
-	$todoUL.appendChild(this.$todoLI);
+	_createClass(TodoItem, [{
+		key: 'markDone',
+		value: function markDone() {
+			this.done = !this.done;
+			this.updateViews();
+		}
+	}, {
+		key: 'updateViews',
+		value: function updateViews() {
+			//access this.done boolean with the li
+			if (this.done) {
+				this.$todoLI.classList.add('done');
+			} else {
+				this.$todoLI.classList.remove('done');
+			}
+		}
+	}]);
 
-	this.$todoButton = document.createElement('button');
-	$todoUL.appendChild(this.$todoButton);
-
-	// this.$field.addEventListener(`keyup`, this.validate.bind(this))
-	// this.$field.addEventListener(`blur`, this.validate.bind(this))
-
-	// if (this.$todoUL.className === updateView){
-	// 	this.$todoLI.classList.add('done')
-	// 	} else {}
-};
+	return TodoItem;
+}();
 
 var todoList = new TodoList();
 var todoItem1 = new TodoItem('Milk');

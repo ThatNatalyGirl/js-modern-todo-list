@@ -24,36 +24,36 @@ class TodoItem {
 
 		this.$text = text;
 		this.done = false;
-
-
-		// this.$text = document.querySelector(text);
-		// if (!this.$text) {
-		// 	console.warn(`Couldn't find an element with text`, text);
-		// 	return false;
-		// }
 		
-		// this.$todoUL = this.$text.parentElement.querySelector('.updateView');
-		// this.$todoUL = this.$text.querySelector('ul');
+		this.$todoLI = document.createElement('li');
+		this.$todoButton = document.createElement('button');
+		this.$todoP = document.createElement('p');
 
-		//make an element to show errors in
-		if(!this.$todoUL) {
-			this.$todoUL = document.createElement('ul');
-			this.$todoUL.classList.add('updateView');
-			// this.$text.parentElement.appendChild(this.$todoUL);
+		$todoUL.appendChild(this.$todoLI);
+		this.$todoLI.appendChild(this.$todoButton);
+		this.$todoLI.appendChild(this.$todoP);
+		
+		this.$todoP.innerHTML = this.$text;
+		this.$todoButton.innerHTML = "done";
+
+		this.$todoButton.addEventListener(`click`, () => {
+			this.markDone();
+		})
+	}
+
+	markDone() {
+		this.done = !this.done;
+		this.updateViews()
+	}
+
+	updateViews () {
+		//access this.done boolean with the li
+		if (this.done) {
+			this.$todoLI.classList.add('done');
+		} else {
+			this.$todoLI.classList.remove('done');
 		}
 
-		this.$todoLI = document.createElement('li');
-		$todoUL.appendChild(this.$todoLI);
-
-		this.$todoButton = document.createElement('button');
-		$todoUL.appendChild(this.$todoButton);
-
-		// this.$field.addEventListener(`keyup`, this.validate.bind(this))
-		// this.$field.addEventListener(`blur`, this.validate.bind(this))
-
-		// if (this.$todoUL.className === updateView){
-		// 	this.$todoLI.classList.add('done')
-		// 	} else {}
 	}
 }
 
