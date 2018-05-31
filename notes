@@ -1,0 +1,29 @@
+For the HW
+
+we want things as loosely coupled as possible
+
+The to-do list items don't know about each other or that they are even in lists
+it knows what the text is and when it's done
+
+js comment block
+
+How to seperate it out - *TODO ITEM*
+-Each item has a set of things to do to itself
+	- string, done button
+	- what does it need to know
+		-inner html (text)
+		-if it's done (boolean) when we toggle the done button it should change the boolean true and false 
+	- There's also the dom manipulation of it
+		-li
+			-p
+				-button	
+
+OUTSIDE OF THAT
+	- Whole list
+	- input field
+		-type in there and they click enter
+			- an item gets created using the string (DOM)
+	- Items themselves
+		- items is an array of todo items
+	- Current items counter and how many are done counter
+		- check how many items are in the array
