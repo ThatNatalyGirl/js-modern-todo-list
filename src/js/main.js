@@ -28,7 +28,8 @@ class TodoItem {
 			return false;
 		}
 		
-		this.$todoUL = this.$text.parentElement.querySelector('.updateView');
+		// this.$todoUL = this.$text.parentElement.querySelector('.updateView');
+		this.$todoUL = this.$text.querySelector('ul');
 
 		//make an element to show errors in
 		if(!this.$todoUL) {
@@ -42,9 +43,9 @@ class TodoItem {
 		this.$field.addEventListener(`keyup`, this.validate.bind(this))
 		this.$field.addEventListener(`blur`, this.validate.bind(this))
 
-		//if (this.$todoUL.className === updateView){
-			//this.$todoLI.classList.add('done')
-			//} else {}
+		if (this.$todoUL.className === updateView){
+			this.$todoLI.classList.add('done')
+			} else {}
 	}
 }
 
