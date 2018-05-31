@@ -22,30 +22,37 @@ var $todoUL = document.querySelector('.todo ul');
 var TodoItem = function TodoItem(text) {
 	_classCallCheck(this, TodoItem);
 
-	this.$text = document.querySelector(text);
-	if (!this.$text) {
-		console.warn('Couldn\'t find an element with text', text);
-		return false;
-	}
+	this.$text = text;
+	this.done = false;
+
+	// this.$text = document.querySelector(text);
+	// if (!this.$text) {
+	// 	console.warn(`Couldn't find an element with text`, text);
+	// 	return false;
+	// }
 
 	// this.$todoUL = this.$text.parentElement.querySelector('.updateView');
-	this.$todoUL = this.$text.querySelector('ul');
+	// this.$todoUL = this.$text.querySelector('ul');
 
 	//make an element to show errors in
 	if (!this.$todoUL) {
 		this.$todoUL = document.createElement('ul');
 		this.$todoUL.classList.add('updateView');
-		this.$text.parentElement.appendChild(this.$todoUL);
+		// this.$text.parentElement.appendChild(this.$todoUL);
 	}
+
 	this.$todoLI = document.createElement('li');
-	$todoUL.appendChild(this.li);
+	$todoUL.appendChild(this.$todoLI);
 
-	this.$field.addEventListener('keyup', this.validate.bind(this));
-	this.$field.addEventListener('blur', this.validate.bind(this));
+	this.$todoButton = document.createElement('button');
+	$todoUL.appendChild(this.$todoButton);
 
-	if (this.$todoUL.className === updateView) {
-		this.$todoLI.classList.add('done');
-	} else {}
+	// this.$field.addEventListener(`keyup`, this.validate.bind(this))
+	// this.$field.addEventListener(`blur`, this.validate.bind(this))
+
+	// if (this.$todoUL.className === updateView){
+	// 	this.$todoLI.classList.add('done')
+	// 	} else {}
 };
 
 var todoList = new TodoList();
