@@ -20,7 +20,7 @@ var TodoList = function () {
 		//when we make them we'll put them in an array and update the numb ers at the bottom
 		//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
 
-
+		this.$todoUL = document.querySelector('.todo ul');
 		this.items = [];
 		this.$input = document.querySelector('input[name="new-item"]');
 
@@ -28,25 +28,24 @@ var TodoList = function () {
 			// 13 is the Enter Key
 			if (event.keyCode === 13) {
 				// console.log(this.input.value);
-				_this.items.push(_this.$input.value);
 				_this.$input.value = "";
+				_this.items.push(_this.$input.value);
 				console.log(_this.items);
+				_this.updateView(_this.$todoUL);
 			}
-			_this.updateView();
 		});
 	}
 
 	_createClass(TodoList, [{
 		key: 'updateView',
-		value: function updateView() {
-			this.$todoUL = document.querySelector('.todo ul');
+		value: function updateView(todoUL) {
 			for (var i = 0; i < this.items.length; i++) {
 				// this.items.push(this.items[i]);
 				this.$todoLI = document.createElement('li');
 				this.$todoButton = document.createElement('button');
 				this.$todoP = document.createElement('p');
 
-				$todoUL.appendChild(this.$todoLI);
+				todoUL.appendChild(this.$todoLI);
 				this.$todoLI.appendChild(this.$todoButton);
 				this.$todoLI.appendChild(this.$todoP);
 
