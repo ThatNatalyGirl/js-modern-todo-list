@@ -13,7 +13,7 @@ class TodoList {
 				
 		this.items = []
 		this.$input = document.querySelector('input[name="new-item"]')
-
+		
 		this.$input.addEventListener(`keypress`, (event) => {
 			// 13 is the Enter Key
 			if (event.keyCode === 13){
@@ -22,34 +22,32 @@ class TodoList {
 				this.$input.value = ""
 				console.log(this.items)
 			}
+			this.updateView()
 		});
+		
 	}
 
-		
-	// }
-	// updateView() {
-	// 	for (var i = 0; i < items.length; i++) {
-	// 		// items.push(items[i]);
-	// 		this.$todoLI = document.createElement('li');
-	// 		this.$todoButton = document.createElement('button');
-	// 		this.$todoP = document.createElement('p');
+	updateView() {
+		this.$todoUL = document.querySelector(`.todo ul`)
+		for (var i = 0; i < this.items.length; i++) {
+			// this.items.push(this.items[i]);
+			this.$todoLI = document.createElement('li');
+			this.$todoButton = document.createElement('button');
+			this.$todoP = document.createElement('p');
 
-	// 		$todoUL.appendChild(this.$todoLI);
-	// 		this.$todoLI.appendChild(this.$todoButton);
-	// 		this.$todoLI.appendChild(this.$todoP);
+			$todoUL.appendChild(this.$todoLI);
+			this.$todoLI.appendChild(this.$todoButton);
+			this.$todoLI.appendChild(this.$todoP);
 			
-	// 		this.$todoP.innerHTML = this.$text;
-	// 		this.$todoButton.innerHTML = "done";
+			this.$todoP.innerHTML = this.$input;
+			this.$todoButton.innerHTML = "done";
 
-	// 	}
-	// 	console.log(items)
-	// }
+		}
+	}
 
 
 }
 
-
-let $todoUL = document.querySelector(`.todo ul`)
 
 
 /**
@@ -64,20 +62,20 @@ class TodoItem {
 		this.$text = text;
 		this.done = false;
 		
-		this.$todoLI = document.createElement('li');
-		this.$todoButton = document.createElement('button');
-		this.$todoP = document.createElement('p');
+		// this.$todoLI = document.createElement('li');
+		// this.$todoButton = document.createElement('button');
+		// this.$todoP = document.createElement('p');
 
-		$todoUL.appendChild(this.$todoLI);
-		this.$todoLI.appendChild(this.$todoButton);
-		this.$todoLI.appendChild(this.$todoP);
+		// $todoUL.appendChild(this.$todoLI);
+		// this.$todoLI.appendChild(this.$todoButton);
+		// this.$todoLI.appendChild(this.$todoP);
 		
-		this.$todoP.innerHTML = this.$text;
-		this.$todoButton.innerHTML = "done";
+		// this.$todoP.innerHTML = this.$text;
+		// this.$todoButton.innerHTML = "done";
 
-		this.$todoButton.addEventListener(`click`, () => {
-			this.markDone();
-		})
+		// this.$todoButton.addEventListener(`click`, () => {
+		// 	this.markDone();
+		// })
 	}
 
 	markDone() {

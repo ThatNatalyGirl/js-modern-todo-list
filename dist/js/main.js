@@ -9,54 +9,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Keeps all the items in an array, and updates the DOM as needed
  * 
  */
-var TodoList = function TodoList() {
-	var _this = this;
+var TodoList = function () {
+	function TodoList() {
+		var _this = this;
 
-	_classCallCheck(this, TodoList);
+		_classCallCheck(this, TodoList);
 
-	//this big thing is managing the little items
-	//the biggest thing is taking the input field and when the person types in it becomes an LI item. So the new ones down at the bottom is going to go away
-	//when we make them we'll put them in an array and update the numb ers at the bottom
-	//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
+		//this big thing is managing the little items
+		//the biggest thing is taking the input field and when the person types in it becomes an LI item. So the new ones down at the bottom is going to go away
+		//when we make them we'll put them in an array and update the numb ers at the bottom
+		//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
 
 
-	this.items = [];
-	this.$input = document.querySelector('input[name="new-item"]');
+		this.items = [];
+		this.$input = document.querySelector('input[name="new-item"]');
 
-	this.$input.addEventListener('keypress', function (event) {
-		// 13 is the Enter Key
-		if (event.keyCode === 13) {
-			// console.log(this.input.value);
-			_this.items.push(_this.$input.value);
-			_this.$input.value = "";
-			console.log(_this.items);
+		this.$input.addEventListener('keypress', function (event) {
+			// 13 is the Enter Key
+			if (event.keyCode === 13) {
+				// console.log(this.input.value);
+				_this.items.push(_this.$input.value);
+				_this.$input.value = "";
+				console.log(_this.items);
+			}
+			_this.updateView();
+		});
+	}
+
+	_createClass(TodoList, [{
+		key: 'updateView',
+		value: function updateView() {
+			this.$todoUL = document.querySelector('.todo ul');
+			for (var i = 0; i < this.items.length; i++) {
+				// this.items.push(this.items[i]);
+				this.$todoLI = document.createElement('li');
+				this.$todoButton = document.createElement('button');
+				this.$todoP = document.createElement('p');
+
+				$todoUL.appendChild(this.$todoLI);
+				this.$todoLI.appendChild(this.$todoButton);
+				this.$todoLI.appendChild(this.$todoP);
+
+				this.$todoP.innerHTML = this.$input;
+				this.$todoButton.innerHTML = "done";
+			}
 		}
-	});
-}
+	}]);
 
-// }
-// updateView() {
-// 	for (var i = 0; i < items.length; i++) {
-// 		// items.push(items[i]);
-// 		this.$todoLI = document.createElement('li');
-// 		this.$todoButton = document.createElement('button');
-// 		this.$todoP = document.createElement('p');
-
-// 		$todoUL.appendChild(this.$todoLI);
-// 		this.$todoLI.appendChild(this.$todoButton);
-// 		this.$todoLI.appendChild(this.$todoP);
-
-// 		this.$todoP.innerHTML = this.$text;
-// 		this.$todoButton.innerHTML = "done";
-
-// 	}
-// 	console.log(items)
-// }
-
-
-;
-
-var $todoUL = document.querySelector('.todo ul');
+	return TodoList;
+}();
 
 /**
  * One todo list item
@@ -64,29 +65,28 @@ var $todoUL = document.querySelector('.todo ul');
  * Updates it's own internal DOM as needed
  */
 
+
 var TodoItem = function () {
 	function TodoItem(text) {
-		var _this2 = this;
-
 		_classCallCheck(this, TodoItem);
 
 		this.$text = text;
 		this.done = false;
 
-		this.$todoLI = document.createElement('li');
-		this.$todoButton = document.createElement('button');
-		this.$todoP = document.createElement('p');
+		// this.$todoLI = document.createElement('li');
+		// this.$todoButton = document.createElement('button');
+		// this.$todoP = document.createElement('p');
 
-		$todoUL.appendChild(this.$todoLI);
-		this.$todoLI.appendChild(this.$todoButton);
-		this.$todoLI.appendChild(this.$todoP);
+		// $todoUL.appendChild(this.$todoLI);
+		// this.$todoLI.appendChild(this.$todoButton);
+		// this.$todoLI.appendChild(this.$todoP);
 
-		this.$todoP.innerHTML = this.$text;
-		this.$todoButton.innerHTML = "done";
+		// this.$todoP.innerHTML = this.$text;
+		// this.$todoButton.innerHTML = "done";
 
-		this.$todoButton.addEventListener('click', function () {
-			_this2.markDone();
-		});
+		// this.$todoButton.addEventListener(`click`, () => {
+		// 	this.markDone();
+		// })
 	}
 
 	_createClass(TodoItem, [{
