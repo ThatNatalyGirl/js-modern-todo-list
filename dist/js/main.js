@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9,42 +9,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Keeps all the items in an array, and updates the DOM as needed
  * 
  */
-var TodoList = function () {
-	function TodoList() {
-		_classCallCheck(this, TodoList);
+var TodoList = function TodoList() {
+	var _this = this;
 
-		//this big thing is managing the little items
-		//the biggest thing is taking the input field and when the person types in it becomes an LI item. So the new ones down at the bottom is going to go away
-		//when we make them we'll put them in an array and update the numb ers at the bottom
-		//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
-		var items = [];
+	_classCallCheck(this, TodoList);
 
-		var input = document.getElementById("myInput");
-		input.addEventListener("keyup", function (event) {
-			event.preventDefault();
-			// 13 is the Enter Key
-			if (event.keyCode === 13) {
-				console.log(input.value);
-				items.push(input.value);
-				input.value = '';
-			}
-		});
-	}
+	//this big thing is managing the little items
+	//the biggest thing is taking the input field and when the person types in it becomes an LI item. So the new ones down at the bottom is going to go away
+	//when we make them we'll put them in an array and update the numb ers at the bottom
+	//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
 
-	_createClass(TodoList, [{
-		key: "updateView",
-		value: function updateView() {
-			for (var i = 0; i < items.length; i++) {
-				items.push(items[i]);
-			}
-			console.log(items);
+
+	this.items = [];
+	this.$input = document.querySelector('input[name="new-item"]');
+
+	this.$input.addEventListener('keypress', function (event) {
+		// 13 is the Enter Key
+		if (event.keyCode === 13) {
+			// console.log(this.input.value);
+			_this.items.push(_this.$input.value);
+			_this.$input.value = "";
+			console.log(_this.items);
 		}
-	}]);
+	});
+}
 
-	return TodoList;
-}();
+// }
+// updateView() {
+// 	for (var i = 0; i < items.length; i++) {
+// 		// items.push(items[i]);
+// 		this.$todoLI = document.createElement('li');
+// 		this.$todoButton = document.createElement('button');
+// 		this.$todoP = document.createElement('p');
 
-var $todoUL = document.querySelector(".todo ul");
+// 		$todoUL.appendChild(this.$todoLI);
+// 		this.$todoLI.appendChild(this.$todoButton);
+// 		this.$todoLI.appendChild(this.$todoP);
+
+// 		this.$todoP.innerHTML = this.$text;
+// 		this.$todoButton.innerHTML = "done";
+
+// 	}
+// 	console.log(items)
+// }
+
+
+;
+
+var $todoUL = document.querySelector('.todo ul');
 
 /**
  * One todo list item
@@ -54,7 +66,7 @@ var $todoUL = document.querySelector(".todo ul");
 
 var TodoItem = function () {
 	function TodoItem(text) {
-		var _this = this;
+		var _this2 = this;
 
 		_classCallCheck(this, TodoItem);
 
@@ -72,19 +84,19 @@ var TodoItem = function () {
 		this.$todoP.innerHTML = this.$text;
 		this.$todoButton.innerHTML = "done";
 
-		this.$todoButton.addEventListener("click", function () {
-			_this.markDone();
+		this.$todoButton.addEventListener('click', function () {
+			_this2.markDone();
 		});
 	}
 
 	_createClass(TodoItem, [{
-		key: "markDone",
+		key: 'markDone',
 		value: function markDone() {
 			this.done = !this.done;
 			this.updateViews();
 		}
 	}, {
-		key: "updateViews",
+		key: 'updateViews',
 		value: function updateViews() {
 			//access this.done boolean with the li
 			if (this.done) {
@@ -99,7 +111,7 @@ var TodoItem = function () {
 }();
 
 var todoList = new TodoList();
-var todoItem1 = new TodoItem("Milk");
-var todoItem2 = new TodoItem("Eggs");
-var todoItem3 = new TodoItem("Diapers");
+var todoItem1 = new TodoItem('Milk');
+var todoItem2 = new TodoItem('Eggs');
+var todoItem3 = new TodoItem('Diapers');
 //# sourceMappingURL=main.js.map
