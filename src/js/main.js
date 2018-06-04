@@ -9,7 +9,28 @@ class TodoList {
 		//the biggest thing is taking the input field and when the person types in it becomes an LI item. So the new ones down at the bottom is going to go away
 		//when we make them we'll put them in an array and update the numb ers at the bottom
 		//it will have it's own update views method that access the item and done count down at the bottom and update them to see it.
+		let items = []
+		
+		var input = document.getElementById("myInput");
+		input.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			// 13 is the Enter Key
+			if (event.keyCode === 13) {
+				console.log(input.value);
+				items.push(input.value);
+				input.value = '';
+			}
+		});
+		
 	}
+	updateView() {
+		for (var i = 0; i < items.length; i++) {
+			items.push(items[i]);
+		}
+		console.log(items)
+	}
+
+
 }
 
 
