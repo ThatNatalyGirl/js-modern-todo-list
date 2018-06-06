@@ -3,6 +3,8 @@
  * Keeps all the items in an array, and updates the DOM as needed
  * 
  */
+
+ 
 class TodoList {
 	constructor() {
 		//this big thing is managing the little items
