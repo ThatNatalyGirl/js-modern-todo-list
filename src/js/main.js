@@ -3,7 +3,6 @@
  * Keeps all the items in an array, and updates the DOM as needed
  * 
  */
-
  
 class TodoList {
 	constructor() {
@@ -17,39 +16,42 @@ class TodoList {
 		this.$input = document.querySelector('input[name="new-item"]')
 
 		this.$input.addEventListener(`keypress`, (event) => {
-			// 13 is the Enter Key
 			if (event.keyCode === 13){
-				// console.log(this.input.value);
-				this.$input.value = ""
-				this.items.push(this.$input.value);
-				console.log(this.items)
-				this.updateView(this.$todoUL)
+				var newItem = new TodoItem(this.$input.value)
+				this.$input.value = '';
+				this.items.push(newItem);
+				// console.log(this.items)
+				this.updateView()
 			}
 		});
-		
+		// listen for an event from below about a change, and call the custom event
 	}
 
-	updateView(todoUL) {
+//managing where all the to do list items go
+//going to manage the counters
+	updateView() {
 		for (var i = 0; i < this.items.length; i++) {
-			// this.items.push(this.items[i]);
-			this.$todoLI = document.createElement('li');
-			this.$todoButton = document.createElement('button');
-			this.$todoP = document.createElement('p');
+			this.$todoUL.appendChild(this.items[i].$todoLI);
+			// console.log( this.items[i].$todoLI )
+		}
+		console.log(this.items.length);
+		//update total items
+		this.$totalItems = document.querySelector(".total");
+		this.$totalItems.innerHTML = this.items.length;
 
-			todoUL.appendChild(this.$todoLI);
-			this.$todoLI.appendChild(this.$todoButton);
-			this.$todoLI.appendChild(this.$todoP);
-			
-			this.$todoP.innerHTML = this.$input;
-			this.$todoButton.innerHTML = "done";
+		//update done items
+		this.$doneItems = document.querySelector("span.done");
+		this.allDoneItems = document.querySelectorAll("li.done");
+		console.log(this.allDoneItems.length)
+		
 
+		for (var i = 0; i < this.allDoneItems.length; i++) {
+			this.document.querySelector("button").addEventListener(`keypress`, () => {
+				this.$doneItems.innerHTML = this.allDoneItems.length
+			}
 		}
 	}
-
-
 }
-
-
 
 /**
  * One todo list item
@@ -63,25 +65,28 @@ class TodoItem {
 		this.$text = text;
 		this.done = false;
 		
-		// this.$todoLI = document.createElement('li');
-		// this.$todoButton = document.createElement('button');
-		// this.$todoP = document.createElement('p');
+		this.$todoLI = document.createElement('li');
+		this.$todoButton = document.createElement('button');
+		this.$todoP = document.createElement('p');
 
-		// $todoUL.appendChild(this.$todoLI);
-		// this.$todoLI.appendChild(this.$todoButton);
-		// this.$todoLI.appendChild(this.$todoP);
+		this.$todoLI.appendChild(this.$todoButton);
+		this.$todoLI.appendChild(this.$todoP);
 		
-		// this.$todoP.innerHTML = this.$text;
-		// this.$todoButton.innerHTML = "done";
+		this.$todoP.innerHTML = this.$text;
+		this.$todoButton.innerHTML = "done";
 
-		// this.$todoButton.addEventListener(`click`, () => {
-		// 	this.markDone();
-		// })
+		this.$todoButton.addEventListener(`click`, () => {
+			this.markDone();
+		})
 	}
 
 	markDone() {
 		this.done = !this.done;
 		this.updateViews()
+
+		//any time something changes down here
+		//yell to the world "something has changed"
+		//create a custom event
 	}
 
 	updateViews () {
@@ -91,12 +96,10 @@ class TodoItem {
 		} else {
 			this.$todoLI.classList.remove('done');
 		}
-
 	}
 }
 
-
 let todoList = new TodoList();
-let todoItem1 = new TodoItem(`Milk`);
-let todoItem2 = new TodoItem(`Eggs`);
-let todoItem3 = new TodoItem(`Diapers`);
+// let todoItem1 = new TodoItem(`Milk`);
+// let todoItem2 = new TodoItem(`Eggs`);
+// let todoItem3 = new TodoItem(`Diapers`);

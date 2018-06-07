@@ -9,6 +9,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Keeps all the items in an array, and updates the DOM as needed
  * 
  */
+
 var TodoList = function () {
 	function TodoList() {
 		var _this = this;
@@ -25,32 +26,40 @@ var TodoList = function () {
 		this.$input = document.querySelector('input[name="new-item"]');
 
 		this.$input.addEventListener('keypress', function (event) {
-			// 13 is the Enter Key
 			if (event.keyCode === 13) {
-				// console.log(this.input.value);
-				_this.$input.value = "";
-				_this.items.push(_this.$input.value);
-				console.log(_this.items);
-				_this.updateView(_this.$todoUL);
+				var newItem = new TodoItem(_this.$input.value);
+				_this.$input.value = '';
+				_this.items.push(newItem);
+				// console.log(this.items)
+				_this.updateView();
 			}
 		});
+		// listen for an event from below about a change, and call the custom event
 	}
+
+	//managing where all the to do list items go
+	//going to manage the counters
+
 
 	_createClass(TodoList, [{
 		key: 'updateView',
-		value: function updateView(todoUL) {
+		value: function updateView() {
 			for (var i = 0; i < this.items.length; i++) {
-				// this.items.push(this.items[i]);
-				this.$todoLI = document.createElement('li');
-				this.$todoButton = document.createElement('button');
-				this.$todoP = document.createElement('p');
+				this.$todoUL.appendChild(this.items[i].$todoLI);
+				// console.log( this.items[i].$todoLI )
+			}
+			console.log(this.items.length);
+			//update total items
+			this.$totalItems = document.querySelector(".total");
+			this.$totalItems.innerHTML = this.items.length;
 
-				todoUL.appendChild(this.$todoLI);
-				this.$todoLI.appendChild(this.$todoButton);
-				this.$todoLI.appendChild(this.$todoP);
+			//update done items
+			this.$doneItems = document.querySelector("span.done");
+			this.allDoneItems = document.querySelectorAll("li.done");
+			console.log(this.allDoneItems.length);
 
-				this.$todoP.innerHTML = this.$input;
-				this.$todoButton.innerHTML = "done";
+			for (var i = 0; i < this.allDoneItems.length; i++) {
+				this.$doneItems.innerHTML = this.allDoneItems.length;
 			}
 		}
 	}]);
@@ -67,25 +76,26 @@ var TodoList = function () {
 
 var TodoItem = function () {
 	function TodoItem(text) {
+		var _this2 = this;
+
 		_classCallCheck(this, TodoItem);
 
 		this.$text = text;
 		this.done = false;
 
-		// this.$todoLI = document.createElement('li');
-		// this.$todoButton = document.createElement('button');
-		// this.$todoP = document.createElement('p');
+		this.$todoLI = document.createElement('li');
+		this.$todoButton = document.createElement('button');
+		this.$todoP = document.createElement('p');
 
-		// $todoUL.appendChild(this.$todoLI);
-		// this.$todoLI.appendChild(this.$todoButton);
-		// this.$todoLI.appendChild(this.$todoP);
+		this.$todoLI.appendChild(this.$todoButton);
+		this.$todoLI.appendChild(this.$todoP);
 
-		// this.$todoP.innerHTML = this.$text;
-		// this.$todoButton.innerHTML = "done";
+		this.$todoP.innerHTML = this.$text;
+		this.$todoButton.innerHTML = "done";
 
-		// this.$todoButton.addEventListener(`click`, () => {
-		// 	this.markDone();
-		// })
+		this.$todoButton.addEventListener('click', function () {
+			_this2.markDone();
+		});
 	}
 
 	_createClass(TodoItem, [{
@@ -93,6 +103,10 @@ var TodoItem = function () {
 		value: function markDone() {
 			this.done = !this.done;
 			this.updateViews();
+
+			//any time something changes down here
+			//yell to the world "something has changed"
+			//create a custom event
 		}
 	}, {
 		key: 'updateViews',
@@ -110,7 +124,7 @@ var TodoItem = function () {
 }();
 
 var todoList = new TodoList();
-var todoItem1 = new TodoItem('Milk');
-var todoItem2 = new TodoItem('Eggs');
-var todoItem3 = new TodoItem('Diapers');
+// let todoItem1 = new TodoItem(`Milk`);
+// let todoItem2 = new TodoItem(`Eggs`);
+// let todoItem3 = new TodoItem(`Diapers`);
 //# sourceMappingURL=main.js.map
