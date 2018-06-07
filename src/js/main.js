@@ -46,7 +46,7 @@ class TodoList {
 		
 
 		for (var i = 0; i < this.allDoneItems.length; i++) {
-			this.document.querySelector("button").addEventListener(`keypress`, () => {
+			this.document.querySelector("button").addEventListener(`click`, () => {
 				this.$doneItems.innerHTML = this.allDoneItems.length
 			}
 		}
