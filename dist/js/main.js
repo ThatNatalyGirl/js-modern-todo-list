@@ -35,6 +35,9 @@ var TodoList = function () {
 			}
 		});
 		// listen for an event from below about a change, and call the custom event
+		window.addEventListener('gotMarkedDone', function (event) {
+			_this.updateView();
+		});
 	}
 
 	//managing where all the to do list items go
@@ -58,9 +61,12 @@ var TodoList = function () {
 			this.allDoneItems = document.querySelectorAll("li.done");
 			console.log(this.allDoneItems.length);
 
-			for (var i = 0; i < this.allDoneItems.length; i++) {
-				this.$doneItems.innerHTML = this.allDoneItems.length;
-			}
+			this.$doneItems.innerHTML = this.allDoneItems.length;
+			// for (var i = 0; i < this.allDoneItems.length; i++) {
+			// 	this.document.querySelector("button").addEventListener(`click`, () => {
+			// this.$doneItems.innerHTML = this.allDoneItems.length
+			// }
+			// } 
 		}
 	}]);
 
@@ -103,6 +109,11 @@ var TodoItem = function () {
 		value: function markDone() {
 			this.done = !this.done;
 			this.updateViews();
+
+			//https://javascript.info/dispatch-events
+			var event = new Event('gotMarkedDone');
+			window.dispatchEvent(event);
+			console.log('test2');
 
 			//any time something changes down here
 			//yell to the world "something has changed"

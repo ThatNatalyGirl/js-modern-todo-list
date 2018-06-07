@@ -28,6 +28,7 @@ class TodoList {
 		window.addEventListener(`gotMarkedDone`, (event) =>{
 			this.updateView();
 		})
+	}
 
 //managing where all the to do list items go
 //going to manage the counters
@@ -89,6 +90,8 @@ class TodoItem {
 		//https://javascript.info/dispatch-events
 		let event = new Event(`gotMarkedDone`);
 		window.dispatchEvent(event)
+			console.log('test2')
+
 		//any time something changes down here
 		//yell to the world "something has changed"
 		//create a custom event
