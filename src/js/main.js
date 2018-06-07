@@ -25,7 +25,9 @@ class TodoList {
 			}
 		});
 		// listen for an event from below about a change, and call the custom event
-	}
+		window.addEventListener(`gotMarkedDone`, (event) =>{
+			this.updateView();
+		})
 
 //managing where all the to do list items go
 //going to manage the counters
@@ -44,12 +46,12 @@ class TodoList {
 		this.allDoneItems = document.querySelectorAll("li.done");
 		console.log(this.allDoneItems.length)
 		
-
-		for (var i = 0; i < this.allDoneItems.length; i++) {
-			this.document.querySelector("button").addEventListener(`click`, () => {
-				this.$doneItems.innerHTML = this.allDoneItems.length
-			}
-		}
+		this.$doneItems.innerHTML = this.allDoneItems.length
+		// for (var i = 0; i < this.allDoneItems.length; i++) {
+		// 	this.document.querySelector("button").addEventListener(`click`, () => {
+				// this.$doneItems.innerHTML = this.allDoneItems.length
+			// }
+		// } 
 	}
 }
 
@@ -84,6 +86,9 @@ class TodoItem {
 		this.done = !this.done;
 		this.updateViews()
 
+		//https://javascript.info/dispatch-events
+		let event = new Event(`gotMarkedDone`);
+		window.dispatchEvent(event)
 		//any time something changes down here
 		//yell to the world "something has changed"
 		//create a custom event
